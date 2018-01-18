@@ -12,24 +12,24 @@ class TaskList extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            task: [
+            task:[
                 {
                     id: 1,
                     description: 'fait ton travail',
                     complete: true
                 },
                 {
-                    id: 1,
+                    id: 2,
                     description: 'Je ferai mon travaill',
                     complete: true
                 },
                 {
-                    id: 1,
+                    id: 3,
                     description: 'Je ferai jamais ce travail',
                     complete: false
                 },
                 {
-                    id: 1,
+                    id: 4,
                     description: 'je serai jamais au travail',
                     complete: false
                 }
@@ -61,17 +61,4 @@ const Tasks = (props) =>(
         {props.task.complete ? 'Bravo' : 'féniant'}
     </article>
 )
-
-/* class Tasks extends React.Component {
-    render() {
-        return(
-            <article>
-                <span>#{this.props.task.id} - {this.props.task.description} -------- </span>
-                {this.props.task.complete ? 'Bravo' : 'féniant'}
-            </article>
-        )
-    }
-} */
-
-
 ReactDOM.render(<TaskApp />, document.getElementById('root'))
