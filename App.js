@@ -1,4 +1,10 @@
 
+const ROUTER={
+    home: '/',
+    incompletetask: '/incompletetask',
+    completetask: '/completetask'
+}
+
 class TaskApp extends React.Component{
     constructor(props) {
         super(props);
@@ -37,27 +43,38 @@ class TaskApp extends React.Component{
     completetask() {
         return this.state.task.filter(task => task.complete);
     }
-    render(){
-        return(
-            <div>
-                <TaskList task={this.Alltask()} title="Mes taches"/>
-                <TaskList task={this.completetask()} title="Mes taches incomplétes"/>
-                <TaskList task={this.completetask()} title="Mes taches completes"/>
-            </div>
-        )
-    }
-}
-class TaskList extends React.Component{
-    render(){
-        return(
-            <div>
-                <h1>{this.props.title}</h1>
+
+    renderRender(){
+        switch (window.location.pathname) {
+            case ROUTER.home: return <TaskList task={this.Alltask()} title="All task" /> ;       
+            case ROUTER.incompletetask: return <TaskList task={this.incompletetask()} title="incomplete task"/>;        
+            case ROUTER.completetask: return <TaskList task={this.completetask()} title="complete task"/> ;       
+            default: return <NotFount/>
                 
-                {this.props.task.map(task => <Tasks key={task.id} task={task} /> )}
+        }
+    }
+    render(){
+        return(
+            <div>
+                <ul>
+                    <li><a href={ROUTER.home}>All tasks</a></li>
+                    <li><a href={ROUTER.completetask}>complete task</a></li>
+                    <li><a href={ROUTER.incompletetask}>incomplete task</a></li>
+                    
+                </ul>
+                {this.renderRender()}
             </div>
         )
     }
 }
+
+
+const TaskList = (props) => (
+    <div>
+        <h1>{props.title}</h1>
+        {props.task.map(task => <Tasks key={task.id} task={task} />)}
+    </div>
+)
 
 const Tasks = (props) =>(
     <article>
@@ -65,4 +82,8 @@ const Tasks = (props) =>(
         {props.task.complete ? 'Bravo' : 'féniant'}
     </article>
 )
+
+const NotFount = () => <h1>Page not found </h1>
+
+
 ReactDOM.render(<TaskApp />, document.getElementById('root'))
