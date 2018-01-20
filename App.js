@@ -1,18 +1,9 @@
 
 class TaskApp extends React.Component{
-    render(){
-        return(
-            <div>
-                <TaskList />
-            </div>
-        )
-    }
-}
-class TaskList extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            task:[
+            task: [
                 {
                     id: 1,
                     description: 'fait ton travail',
@@ -36,20 +27,33 @@ class TaskList extends React.Component{
             ]
         };
     }
-    render(){
-        const incompleteTask = this.state.task.filter(task => task.complete === false) 
-        const completeTask = this.state.task.filter(task => task.complete === true) 
 
+    Alltask(){
+        return this.state.task;
+    }
+    incompletetask() {
+        return this.state.task.filter(task => !task.complete);
+    }
+    completetask() {
+        return this.state.task.filter(task => task.complete);
+    }
+    render(){
         return(
             <div>
-                <h1>All Tasks</h1>
-                {this.state.task.map(task => <Tasks key={task.id} task={task} /> )}
-
-                <h1>Tasks incomplete</h1>
-                {incompleteTask.map(task => <Tasks key={task.id} task={task} />)}
-
-                <h1>Tasks complete</h1>
-                {completeTask.map(task => <Tasks key={task.id} task={task} />)}
+                <TaskList task={this.Alltask()} title="Mes taches"/>
+                <TaskList task={this.completetask()} title="Mes taches incomplétes"/>
+                <TaskList task={this.completetask()} title="Mes taches completes"/>
+            </div>
+        )
+    }
+}
+class TaskList extends React.Component{
+    render(){
+        return(
+            <div>
+                <h1>{this.props.title}</h1>
+                
+                {this.props.task.map(task => <Tasks key={task.id} task={task} /> )}
             </div>
         )
     }
