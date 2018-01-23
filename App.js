@@ -87,7 +87,7 @@ class TaskApp extends React.Component{
                 </ul>
 
                 <form onSubmit={this.addTask}>
-                    <input require type="text" onChange={this.handleChange} value={this.state.newTask} placeholder="tapez votre description" />
+                    <input required type="text" onChange={this.handleChange} value={this.state.newTask} placeholder="tapez votre description" />
                     <input type="submit" value="Add Task" />
                 </form>
 
